@@ -9,6 +9,7 @@ that displays the movies and plays the trailers.
 import fresh_tomatoes
 import media
 
+
 #create movie instances
 black_cat_white_cat = media.Movie("Black Cat, White Cat",
                                   "Emir Kustirica",
