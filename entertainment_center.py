@@ -1,7 +1,7 @@
 import fresh_tomatoes
 import media
 
-
+## Create movie instances
 black_cat_white_cat = media.Movie("Black Cat, White Cat",
                                   "Emir Kustirica",
                                   "1998",
@@ -26,6 +26,8 @@ helvetica = media.Movie("Helvetica",
                         "https://www.youtube.com/watch?v=7JkpYgjbYRg",
                         "https://www.youtube.com/watch?v=CttXWjR1dr4")
 
+#Create an array of movies.append  This gets passed to the open_movies_page function on the fresh tomates module.
 movies = [black_cat_white_cat, coffee_and_cigarettes, helvetica]
 
+##Build fresh_tomatoes.htlm page. Pass in array of movie instances.
 fresh_tomatoes.open_movies_page(movies)
