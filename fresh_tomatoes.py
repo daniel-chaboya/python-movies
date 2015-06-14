@@ -14,7 +14,7 @@ main_page_head = '''
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <!-- Google Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Fascinate' rel='stylesheet' type='text/css'>
     <!-- Font Awesome -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <style type="text/css" media="screen">
@@ -46,10 +46,17 @@ main_page_head = '''
         }
         .navbar-brand {
             float: none;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 25px;
+            font-family: 'Fascinate', sans-serif;
+            font-size: 40px;
             color: 'red';
             font-weight: 700;
+        }
+        .navbar-default .navbar-brand .red {
+            color: #c0392b;
+        }
+
+        .navbar-default .navbar-brand .green {
+            color: #27ae60;
         }
         #trailer .modal-dialog {
             margin-top: 200px;
@@ -183,7 +190,7 @@ main_page_content = '''
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" id="brand" href="#">Fresh Tomatoes Movie Trailers</a>
+            <a class="navbar-brand" id="brand" href="#"><span class="green">Fresh</span><span class="red"> Tomatoes</span></a>
           </div>
         </div>
       </div>
