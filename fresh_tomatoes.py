@@ -58,6 +58,29 @@ main_page_head = '''
         .navbar-default .navbar-brand .green {
             color: #27ae60;
         }
+        .carousel h2{
+            margin: 0;     
+            color: #666;
+            padding-top: 90px;
+            font-size: 52px;
+            font-family: "trebuchet ms", sans-serif;    
+        }
+        .item {
+            background: #333;    
+            text-align: center;
+            height: 500px !important;
+        }
+        .carousel{
+            margin-top: 20px;
+        }
+        .carousel-caption h3{
+            font-size: 35px;
+        }
+        .bs-example{
+            margin: 0 auto;
+            padding: 0;
+            height: 500px;
+        }
         #trailer .modal-dialog {
             margin-top: 200px;
             width: 640px;
@@ -186,7 +209,7 @@ main_page_content = '''
     </div>
     
     <!-- Main Page Content -->
-    <div class="container">
+    <div class="container-fluid">
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
@@ -194,6 +217,42 @@ main_page_content = '''
           </div>
         </div>
       </div>
+    </div>
+    <div class="container-fluid bs-example">
+        <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
+            <!-- Carousel indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>   
+           <!-- Wrapper for carousel items -->
+            <div class="carousel-inner">
+                <div class="active item" style="background: url(http://wiki.tarantino.info/images/Dogs2.jpg); background-size: 100% auto" >
+                    <div class="carousel-caption">
+                      <h3>Resevoir Dogs</h3>
+                    </div>
+                </div>
+                <div class="item" style="background: url(https://cynicritics.files.wordpress.com/2013/03/936full-ferris-buellers-day-off-screenshot.jpg); background-size: 100% auto">
+                    <div class="carousel-caption">
+                      <h3>Ferris Buellers Day Off</h3>
+                    </div>
+                </div>
+                <div class="item" style="background: url(https://cynicritics.files.wordpress.com/2013/03/ragingbull2.jpg); background-size:100% auto">    
+                    <div class="carousel-caption">
+                        <h3>Raging Bull</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- Carousel controls -->
+            <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+    </div>
     </div>
     <div class="container movie-content">
       {movie_tiles}
