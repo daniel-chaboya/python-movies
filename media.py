@@ -4,7 +4,8 @@ Also contains a method that opens a web browser to view the movie trailers.
 '''
 
 import webbrowser
-
+from urllib import urlopen
+import json
 
 class Movie():
     """Build an instance of a movie by calling media.Movie()"""
@@ -24,3 +25,17 @@ class Movie():
     #open web browser to view youtube movie trailer
     def play_trailer(self):
         webbrowser.open(self.trailer_youtube_url)
+
+# call movie api to get movie data
+def get_movie(movie_name):
+    if isinstance(movie_name, str) == False:
+        print "Movie name not a string"
+        return
+
+    movie_name = movie_name.replace(" ", "+")
+    
+    movie_details = urlopen('http://www.omdbapi.com/?t=' + movie_name + '&r=json').read()
+
+    movie_details = json.loads(movie_details)
+    return movie_details
+    
