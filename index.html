@@ -1,0 +1,313 @@
+
+<head>
+    <meta charset="utf-8">
+    <title>Fresh Tomatoes!</title>
+
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Fascinate' rel='stylesheet' type='text/css'>
+    <!-- Font Awesome -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <style type="text/css" media="screen">
+        body {
+            padding-top: 80px;
+            background-color: #BDC3C7;
+        }
+        a {
+            text-decoration: none !important;
+        }
+        a:hover {
+             cursor:pointer;
+        }
+        small {
+            text-align: left;
+        }
+        .navbar {
+            padding-top: 25px;
+            padding-bottom: 30px;
+        }
+        .navbar-header {
+            float: left;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+        }
+        .navbar-default .havbar-header .navbar-brand {
+            color: '#D91E18'
+        }
+        .navbar-brand {
+            float: none;
+            font-family: 'Fascinate', sans-serif;
+            font-size: 40px;
+            color: 'red';
+            font-weight: 700;
+        }
+        .navbar-default .navbar-brand .red {
+            color: #c0392b;
+        }
+
+        .navbar-default .navbar-brand .green {
+            color: #27ae60;
+        }
+        .carousel h2{
+            margin: 0;     
+            color: #666;
+            padding-top: 90px;
+            font-size: 52px;
+            font-family: "trebuchet ms", sans-serif;    
+        }
+        .item {
+            background: #333;    
+            text-align: center;
+            height: 500px !important;
+        }
+        .carousel{
+            margin-top: 20px;
+        }
+        .carousel-caption h3{
+            font-size: 35px;
+        }
+        .bs-example{
+            margin: 0 auto;
+            padding: 0;
+            height: 500px;
+        }
+        #trailer .modal-dialog {
+            margin-top: 200px;
+            width: 640px;
+            height: 480px;
+        }
+        .hanging-close {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            z-index: 9001;
+        }
+        #trailer-video {
+            width: 100%;
+            height: 100%;
+        }
+        .movie-content {
+            margin-top: 60px;
+        }
+        .movie-tile {
+            margin-bottom: 20px;
+            padding-top: 20px;
+        }
+        .scale-media {
+            padding-bottom: 56.25%;
+            position: relative;
+        }
+        .scale-media iframe {
+            border: none;
+            height: 100%;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background-color: white;
+        }
+        .pop > div {
+            width: 250px;
+        }
+        .pop .popover-title {
+            background-color: #96281B;
+        }
+        .popover-title {
+            color: #fff;
+            font-size: 18px;
+        }
+        .popover-title small {
+            font-size: 12px;
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8">
+    
+        // Pause the video when the modal is closed
+        $(document).on('click', '.hanging-close, .modal-backdrop, .modal', function (event) {
+            // Remove the src so the player itself gets removed, as this is the only
+            // reliable way to ensure the video stops playing in IE
+            $("#trailer-video-container").empty();
+        });
+        
+        // Start playing the video whenever the trailer modal is opened
+        $(document).on('click', '.trailer-link', function (event) {
+            var trailerYouTubeId = $(this).attr('data-trailer-youtube-id')
+            var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
+            $("#trailer-video-container").empty().append($("<iframe></iframe>", {
+              'id': 'trailer-video',
+              'type': 'text-html',
+              'src': sourceUrl,
+              'frameborder': 0
+            }));
+        });     
+         
+        // Animate movie tile display and prepare functionality of popover
+        $(document).ready(function () {
+
+            // Popover(on hover) for movie details.  Utilizes bootstrap popover functionality
+            $(".popover-details").popover({html: true,
+                    placement: "right",
+                    trigger: "manual",
+                    title: function () {
+                        return $(this).siblings('.pop-title').text()
+                    },
+                    content: function () {
+                        return $(this).siblings('.pop-content').html()
+                    }
+            }).on("mouseenter", function () {
+                var _this = this;
+                $(this).popover("show");
+                $(".popover").on("mouseleave", function () {
+                    $(_this).popover('hide');
+                });
+            }).on("mouseleave", function () {
+                var _this = this;
+                setTimeout(function () {
+                    if (!$(".popover:hover").length) {
+                        $(_this).popover("hide");
+                    }
+                }, 100);
+            });
+            
+            //Animate the display of movie images once the DOM is ready.
+          $('.movie-tile').hide().first().show("fast", function showNext() {
+            $(this).next("div").show("fast", showNext);
+          });
+           
+        });
+        
+    </script>
+</head>
+
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <!-- Trailer Video Modal -->
+    <div class="modal" id="trailer">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <a href="#" class="hanging-close" data-dismiss="modal" aria-hidden="true">
+            <img src="https://lh5.ggpht.com/v4-628SilF0HtHuHdu5EzxD7WRqOrrTIDi_MhEG6_qkNtUK5Wg7KPkofp_VJoF7RS2LhxwEFCO1ICHZlc-o_=s0#w=24&h=24"/>
+          </a>
+          <div class="scale-media" id="trailer-video-container">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Main Page Content -->
+    <div class="container-fluid">
+      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" id="brand" href="#"><span class="green">Fresh</span><span class="red"> Tomatoes</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid bs-example">
+        <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
+            <!-- Carousel indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>   
+           <!-- Wrapper for carousel items -->
+            <div class="carousel-inner">
+                <div class="active item" style="background: url(http://wiki.tarantino.info/images/Dogs2.jpg); background-size: 100% auto" >
+                    <div class="carousel-caption">
+                      <h3>Resevoir Dogs</h3>
+                    </div>
+                </div>
+                <div class="item" style="background: url(https://cynicritics.files.wordpress.com/2013/03/936full-ferris-buellers-day-off-screenshot.jpg); background-size: 100% auto">
+                    <div class="carousel-caption">
+                      <h3>Ferris Buellers Day Off</h3>
+                    </div>
+                </div>
+                <div class="item" style="background: url(https://cynicritics.files.wordpress.com/2013/03/ragingbull2.jpg); background-size:100% auto">    
+                    <div class="carousel-caption">
+                        <h3>Raging Bull</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- Carousel controls -->
+            <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+    </div>
+    </div>
+    <div class="container movie-content">
+      
+<div class="pop movie-tile col-md-6 col-lg-4 " >
+    <img class="popover-details" src="http://upload.wikimedia.org/wikipedia/en/e/e4/Poster1234.jpg" width="220" height="342">
+    <div class="pop-title hide">
+        <h2>Black Cat, White Cat</h2>     
+    </div>
+    <div class="pop-content hide">
+        <p><small>Gypsy mobsters, dirty deals and shotgun weddings.                                   This could be the start of a                                   beautiful friendship.</small></p>
+        <div>
+            <strong>Year:</strong>
+            <span><small>1998</small></span>
+        </div>
+        <div>
+            <strong>Director:</strong>
+            <span>Emir Kustirica</span>
+        </div>
+        <hr/>
+        <a class="trailer-link" data-trailer-youtube-id="drTgrPzSd-Y" data-toggle="modal" data-target="#trailer"><i class="fa fa-video-camera"></i>&nbsp;Watch Trailer</a>
+    </div>
+</div>
+
+<div class="pop movie-tile col-md-6 col-lg-4 " >
+    <img class="popover-details" src="http://upload.wikimedia.org/wikipedia/en/8/8d/Coffee_and_Cigarettes_movie.jpg" width="220" height="342">
+    <div class="pop-title hide">
+        <h2>Coffee and Cigarettes</h2>     
+    </div>
+    <div class="pop-content hide">
+        <p><small>A series of vignettes that all have coffee                                     and cigarettes in common.</small></p>
+        <div>
+            <strong>Year:</strong>
+            <span><small>2003</small></span>
+        </div>
+        <div>
+            <strong>Director:</strong>
+            <span>Jim Jarmusch</span>
+        </div>
+        <hr/>
+        <a class="trailer-link" data-trailer-youtube-id="mM6Mpn0-eyQ" data-toggle="modal" data-target="#trailer"><i class="fa fa-video-camera"></i>&nbsp;Watch Trailer</a>
+    </div>
+</div>
+
+<div class="pop movie-tile col-md-6 col-lg-4 " >
+    <img class="popover-details" src="http://upload.wikimedia.org/wikipedia/commons/2/28/HelveticaSpecimenCH.svg" width="220" height="342">
+    <div class="pop-title hide">
+        <h2>Helvetica</h2>     
+    </div>
+    <div class="pop-content hide">
+        <p><small>A documentary about typography,                         graphic design, and global visual culture.</small></p>
+        <div>
+            <strong>Year:</strong>
+            <span><small>2007</small></span>
+        </div>
+        <div>
+            <strong>Director:</strong>
+            <span>Gary Hustwit</span>
+        </div>
+        <hr/>
+        <a class="trailer-link" data-trailer-youtube-id="7JkpYgjbYRg" data-toggle="modal" data-target="#trailer"><i class="fa fa-video-camera"></i>&nbsp;Watch Trailer</a>
+    </div>
+</div>
+
+    </div>
+  </body>
+</html>
