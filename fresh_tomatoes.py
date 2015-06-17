@@ -1,6 +1,7 @@
 import webbrowser
 import os
 import re
+import random
 
 # Styles and scripting for the page
 main_page_head = '''
@@ -57,6 +58,13 @@ main_page_head = '''
 
         .navbar-default .navbar-brand .green {
             color: #27ae60;
+        }
+        .staff-pick {
+            font-family: 'Helvetica', sans-serif;
+            background-color: #f7fafa;
+            border-bottom: 2px solid #d9d9de;
+            padding-top: 60px;
+            padding-bottom: 60px;
         }
         .carousel h2{
             margin: 0;     
@@ -218,6 +226,7 @@ main_page_content = '''
         </div>
       </div>
     </div>
+    
     <div class="container-fluid bs-example">
         <div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel">
             <!-- Carousel indicators -->
@@ -230,12 +239,12 @@ main_page_content = '''
             <div class="carousel-inner">
                 <div class="active item" style="background: url(http://wiki.tarantino.info/images/Dogs2.jpg); background-size: 100% auto" >
                     <div class="carousel-caption">
-                      <h3>Resevoir Dogs</h3>
+                      <h3>Reservoir Dogs</h3>
                     </div>
                 </div>
                 <div class="item" style="background: url(https://cynicritics.files.wordpress.com/2013/03/936full-ferris-buellers-day-off-screenshot.jpg); background-size: 100% auto">
                     <div class="carousel-caption">
-                      <h3>Ferris Buellers Day Off</h3>
+                      <h3>Ferris Bueller's Day Off</h3>
                     </div>
                 </div>
                 <div class="item" style="background: url(https://cynicritics.files.wordpress.com/2013/03/ragingbull2.jpg); background-size:100% auto">    
@@ -253,6 +262,12 @@ main_page_content = '''
             </a>
         </div>
     </div>
+    </div>
+    <!-- Staff Pick -->
+    <div class="staff-pick container-fluid">
+        <div class="row-fluid">
+            <h4>Staff Pick</h4>
+        </div>
     </div>
     <div class="container movie-content">
       {movie_tiles}
@@ -283,6 +298,7 @@ movie_tile_content = '''
 </div>
 '''
 def create_movie_tiles_content(movies):
+    
     # The HTML content for this section of the page
     content = ''
     for movie in movies:
@@ -300,9 +316,14 @@ def create_movie_tiles_content(movies):
             poster_image_url=movie.poster_image_url,
             trailer_youtube_id=trailer_youtube_id
         )
-    print(content)
     return content
 
+def create_staff_pick(movies):
+    movie =  random.choice(movies)
+    print movie.trailer_youtube_url
+
+
+    
 def open_movies_page(movies):
   # Create or overwrite the output file
   output_file = open('fresh_tomatoes.html', 'w')
